@@ -73,7 +73,7 @@ public class EdificioService {
             resultado.add(persona.toView());
         return resultado;
     }
-    public List<EdificioView> obtenerEdificios(int codigo){
+    public List<EdificioView> obtenerEdificios(){
         List<Edificio> edificios = edificioRepository.findAll();
         List<EdificioView> resultado = new ArrayList<>();
         for (Edificio edificio: edificios){

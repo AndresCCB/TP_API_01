@@ -78,9 +78,9 @@ public class ReclamoService {
         return resultado;
     }
 
-    public Reclamo agregarReclamo(int codigo, String piso, String numero, String documento, String ubicacion, String descripcion) throws  UnidadException, PersonaException, EdificioException {
-        Edificio edificio = edificioService.buscarEdificio(codigo);
-        Unidad unidad = unidadService.buscarUnidad(codigo, piso, numero);
+    public Reclamo agregarReclamo(int codigoedificio, int codigounidad, String piso, String numero, String documento, String ubicacion, String descripcion) throws  UnidadException, PersonaException, EdificioException {
+        Edificio edificio = edificioService.buscarEdificio(codigoedificio);
+        Unidad unidad = unidadService.buscarUnidad(codigounidad, piso, numero);
         Persona persona = personaService.buscarPersona(documento);
         Reclamo reclamo = new Reclamo(persona, edificio, ubicacion, descripcion, unidad);
         reclamoRepository.save(reclamo);
