@@ -17,7 +17,7 @@ import java.util.List;
 public class Reclamo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "idReclamo")
+    @Column(name = "idreclamo")
     private Integer numero;
     @ManyToOne
     @JoinColumn(name = "documento")

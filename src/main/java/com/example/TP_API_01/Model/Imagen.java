@@ -17,7 +17,7 @@ public class Imagen {
     private String tipo;
 
     @ManyToOne
-    @JoinColumn(name = " idReclamo")
+    @JoinColumn(name = " idreclamo")
     private Reclamo reclamo;
 
     public Imagen() {

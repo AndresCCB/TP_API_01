@@ -8,7 +8,7 @@ public class TpApi01Application {
 
 	public static void main(String[] args) {
 		SpringApplication.run(TpApi01Application.class, args);
-		
+
 	}
 
 }
