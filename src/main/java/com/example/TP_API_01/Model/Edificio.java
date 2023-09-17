@@ -22,7 +22,7 @@ public class Edificio {
     @Column(name = "direccion", length = 100, nullable = false)
     private String direccion;
 
-    @OneToMany(mappedBy = "edificio", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "edificio", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Unidad> unidades;
 
     public Edificio() {unidades = new ArrayList<>();}

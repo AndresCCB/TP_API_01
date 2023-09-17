@@ -32,7 +32,7 @@ import org.springframework.context.ConfigurableApplicationContext;
 @SpringBootApplication
 public class TpApi01Application {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws PersonaException, EdificioException, ReclamoException, UnidadException {
 		//SpringApplication.run(TpApi01Application.class, args);
 
 		ConfigurableApplicationContext context = SpringApplication.run(TpApi01Application.class, args);
@@ -42,31 +42,71 @@ public class TpApi01Application {
 		PersonaService personaService = context.getBean(PersonaService.class);
 		ReclamoService reclamoService = context.getBean(ReclamoService.class);
 
-		try {
+
+		/*
 
 			int codigoEdificio = 1;
-
+/*
 			List<UnidadView> unidadesPorEdificio = edificioService.getUnidadesPorEdificio(codigoEdificio);
-			List<PersonaView> habilitadosPorEdificio = edificioService.habilitadosPorEdificio(codigoEdificio);
-			List<PersonaView> dueniosPorEdificio = edificioService.dueniosPorEdificio(codigoEdificio);
-			List<PersonaView> habitantesPorEdificio = edificioService.habitantesPorEdificio(codigoEdificio);
-			List<EdificioView> edificios = edificioService.obtenerEdificios();
+			for (UnidadView unidadView: unidadesPorEdificio){
+				System.out.println(unidadView.toString());
+			}
 
-		} catch (EdificioException e) {
-			e.printStackTrace();
-		}
-		try{
+ */
+/*
+			List<PersonaView> habilitadosPorEdificio = edificioService.habilitadosPorEdificio(codigoEdificio);
+			System.out.println(habilitadosPorEdificio);
+
+
+ */
+
+		/*
+		//Caused by: java.util.ConcurrentModificationException
+
+			List<PersonaView> dueniosPorEdificio = edificioService.dueniosPorEdificio(codigoEdificio);
+			for (PersonaView personaView: dueniosPorEdificio){
+				System.out.println(personaView.toString());
+			}
+
+		 */
+
+ /*
+		Caused by: java.util.ConcurrentModificationException
+
+			List<PersonaView> habitantesPorEdificio = edificioService.habitantesPorEdificio(codigoEdificio);
+			System.out.println(habitantesPorEdificio);
+
+
+  */
+
+
+/*
+			List<EdificioView> edificios = edificioService.obtenerEdificios();
+			System.out.println(edificios);
+
+
+
+ */
+
+
+
+/*
 			String documento = "1234456";
 			String nombre= "Andres";
 
 
-			Persona personaPorId= personaService.buscarPersona(documento);
 			Persona agregarPersona = personaService.agregarPersona(documento,nombre);
+			System.out.println( personaService.buscarPersona(documento).toString());
 			personaService.eliminarPersona(documento);
-		} catch (PersonaException e) {
-			e.printStackTrace();
-		}
-		try {
+
+
+
+ */
+
+
+/*
+
+			personaService.agregarPersona("123456","Andres");
 			//Edificio
 			int codigoEdificio = 1;
            //unidad
@@ -81,30 +121,38 @@ public class TpApi01Application {
 			String path ="direccionImagen";
 			String tipo = "tipo";
 			List<ReclamoView> reclamosPorEdificio = reclamoService.reclamosPorEdificio(codigoEdificio);
+			System.out.println(reclamosPorEdificio);
 			List<ReclamoView> reclamosPorUnidad = reclamoService.reclamosPorUnidad(codigoUnidad, pisounidad,numerounidad);
+			System.out.println(reclamosPorUnidad);
 			List<ReclamoView> reclamosPorPersona = reclamoService.reclamosPorPersona(documento);
+			System.out.println(reclamosPorPersona);
 			ReclamoView reclamosPorNumero = reclamoService.reclamosPorNumero(numeroreclamo);
-			Reclamo agregarreclamo= reclamoService.agregarReclamo(codigoEdificio,codigoUnidad, pisounidad, numerounidad,documento,"Paraguay 1957", "goteras");
-			reclamoService.agregarImagenAReclamo(numeroreclamo,path, tipo);
-			reclamoService.cambiarEstado(numeroreclamo,estado);
-			Reclamo buscarReclamo = reclamoService.buscarReclamo(numeroreclamo);
-		} catch (UnidadException e) {
-			e.printStackTrace();
-		} catch (PersonaException e) {
-			e.printStackTrace();
-		} catch (EdificioException e) {
-			e.printStackTrace();
-		} catch (ReclamoException e) {
-			e.printStackTrace();
-		}
+			System.out.println(reclamosPorNumero);
 
-		try {
+			//Aun no se han probado los proximos 3 reclamos
+			Reclamo agregarreclamo= reclamoService.agregarReclamo(codigoEdificio,codigoUnidad, pisounidad, numerounidad,documento,"Paraguay 1957", "goteras");
+
+			reclamoService.agregarImagenAReclamo(numeroreclamo,path, tipo);
+
+			reclamoService.cambiarEstado(numeroreclamo,estado);
+
+
+			Reclamo buscarReclamo = reclamoService.buscarReclamo(numeroreclamo);
+
+ */
+
+
+
+
+
+/*
+
 			//Edificio
 			int codigoEdificio = 1;
 			//unidad
 			int codigoUnidad = 1;
-			String pisounidad = "1";
-			String numerounidad ="1";
+			String pisounidad = "10";
+			String numerounidad ="6";
 			String documento = "123456";
 			//reclamo
 			int numeroreclamo = 1;
@@ -114,19 +162,25 @@ public class TpApi01Application {
 			String tipo = "tipo";
 
 			Unidad buscarUnidad = unidadService.buscarUnidad(codigoUnidad,pisounidad,numerounidad);
+			System.out.println(buscarUnidad.toView());
 			List<PersonaView> dueniosPorUnidad = unidadService.dueniosPorUnidad(codigoUnidad,pisounidad,numerounidad);
+			System.out.println(dueniosPorUnidad);
 			List<PersonaView> inquilinosPorUnidad = unidadService.inquilinosPorUnidad(codigoUnidad,pisounidad,numerounidad);
+			System.out.println(inquilinosPorUnidad);
+			/*
+			//los siguientes 5 metodos no se han probado
 			unidadService.transferirUnidad(codigoUnidad,pisounidad,numerounidad,documento);
 			unidadService.agregarDuenioUnidad(codigoUnidad, pisounidad,numerounidad,documento);
 			unidadService.agregarInquilinoUnidad(codigoUnidad, pisounidad,numerounidad,documento);
 			unidadService.liberarUnidad(codigoUnidad,pisounidad,numerounidad);
 			unidadService.habitarUnidad(codigoUnidad,pisounidad,numerounidad);
 
-		} catch (UnidadException e) {
-			e.printStackTrace();
-		} catch (PersonaException e) {
-			e.printStackTrace();
-		}
+			 */
+
+
+
 	}
+
+
 
 }

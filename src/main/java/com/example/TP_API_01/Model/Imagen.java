@@ -16,8 +16,8 @@ public class Imagen {
     @Column(name = "tipo", length = 10)
     private String tipo;
 
-    @ManyToOne
-    @JoinColumn(name = " idreclamo")
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = " idreclamo" )
     private Reclamo reclamo;
 
     public Imagen() {

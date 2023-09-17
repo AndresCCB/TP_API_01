@@ -19,24 +19,24 @@ public class Reclamo {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idreclamo")
     private Integer numero;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "documento")
     private Persona persona;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "codigo")
     private Edificio edificio;
     @Column(name = "ubicacion", length = 300)
     private String ubicacion;
     @Column(name = "descripcion", length = 1000)
     private String descripcion;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "identificador")
     private Unidad unidad;
 
     @Transient
     private Estado estado;
 
-    @OneToMany(mappedBy = "reclamo", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "reclamo", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Imagen> imagenes;
 
     public Reclamo() {imagenes = new ArrayList<Imagen>(); }
