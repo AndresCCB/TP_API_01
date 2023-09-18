@@ -135,7 +135,7 @@ public class TpApi01Application {
 			reclamoService.agregarImagenAReclamo(numeroreclamo,path, tipo);
 
 			reclamoService.cambiarEstado(numeroreclamo,estado);
-
+//ad
 
 			Reclamo buscarReclamo = reclamoService.buscarReclamo(numeroreclamo);
 
