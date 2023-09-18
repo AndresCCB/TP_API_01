@@ -52,6 +52,10 @@ public class Imagen {
         this.tipo = tipo;
     }
 
+    public void setReclamo(Reclamo reclamo) {
+        this.reclamo = reclamo;
+    }
+
     public ImagenView toView(){
         return new ImagenView(numero,path,tipo);
     }

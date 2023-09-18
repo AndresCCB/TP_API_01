@@ -4,10 +4,8 @@ import com.example.TP_API_01.Exceptions.EdificioException;
 import com.example.TP_API_01.Exceptions.PersonaException;
 import com.example.TP_API_01.Exceptions.ReclamoException;
 import com.example.TP_API_01.Exceptions.UnidadException;
-import com.example.TP_API_01.Model.Edificio;
-import com.example.TP_API_01.Model.Persona;
-import com.example.TP_API_01.Model.Reclamo;
-import com.example.TP_API_01.Model.Unidad;
+import com.example.TP_API_01.Model.*;
+import com.example.TP_API_01.Repositories.ImagenRepository;
 import com.example.TP_API_01.Repositories.ReclamoRepository;
 import com.example.TP_API_01.Views.Estado;
 import com.example.TP_API_01.Views.ReclamoView;
@@ -34,6 +32,8 @@ public class ReclamoService {
     PersonaService personaService;
     @Autowired
     EdificioService edificioService;
+    @Autowired
+    ImagenService imagenService;
     public List<ReclamoView> reclamosPorEdificio(int codigo){
         Edificio edificio = new Edificio();
         edificio.setCodigo(codigo);
@@ -91,6 +91,7 @@ public class ReclamoService {
         Reclamo reclamo = buscarReclamo(numero);
         reclamo.agregarImagen(direccion, tipo);
         reclamoRepository.save(reclamo);
+
     }
     public void cambiarEstado(int numero, Estado estado) throws ReclamoException {
         Reclamo reclamo = reclamoRepository.findById(numero).get();
