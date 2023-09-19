@@ -64,7 +64,16 @@ public class TpApi01Application {
 			//System.out.println(dueniosPorEdificio.size());
 
 
+/*
+SELECT p.*
+from personas p
+Join inquilinos d on p.documento = d.documento
+JOIN unidades u ON d.identificador = u.identificador
+JOIN edificios e ON u.codigoedificio = e.codigo
+WHERE e.codigo = 1;
 
+
+ */
 
 			//List<PersonaView> habitantesPorEdificio = edificioService.habitantesPorEdificio(codigoEdificio);
 			//System.out.println(habitantesPorEdificio);
