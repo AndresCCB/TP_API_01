@@ -72,8 +72,9 @@ public class Edificio {
         for(Unidad unidad : unidades) {
             List<Persona> duenios = unidad.getDuenios();
             for(Persona p : duenios)
-                duenios.add(p);
+                resultado.add(p);
         }
+
         return resultado;
     }
 

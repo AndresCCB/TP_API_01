@@ -43,7 +43,7 @@ public class TpApi01Application {
 
 //Inicio metodos edificio
 
-		//	int codigoEdificio = 1;
+			int codigoEdificio = 1;
 
 			//List<UnidadView> unidadesPorEdificio = edificioService.getUnidadesPorEdificio(codigoEdificio);
 			//	System.out.println(unidadesPorEdificio);
@@ -58,14 +58,13 @@ public class TpApi01Application {
 
 
 
-		//Caused by: java.util.ConcurrentModificationException
+
 
 			//List<PersonaView> dueniosPorEdificio = edificioService.dueniosPorEdificio(codigoEdificio);
-			//System.out.println(dueniosPorEdificio);
+			//System.out.println(dueniosPorEdificio.size());
 
 
 
-		//Caused by: java.util.ConcurrentModificationException
 
 			//List<PersonaView> habitantesPorEdificio = edificioService.habitantesPorEdificio(codigoEdificio);
 			//System.out.println(habitantesPorEdificio);
@@ -137,37 +136,41 @@ public class TpApi01Application {
 
 
 
-/*
 
 			//Edificio
-			int codigoEdificio = 1;
+			//int codigoEdificio = 1;
 			//unidad
-			int codigoUnidad = 1;
-			String pisounidad = "10";
-			String numerounidad ="6";
-			String documento = "123456";
+			//int codigoUnidad = 1;
+			//String pisounidad = "10";
+			//String numerounidad ="6";
+			//String documento = "123456";
 			//reclamo
-			int numeroreclamo = 1;
-			Estado estado =Estado.desestimado;
+			//int numeroreclamo = 1;
+			//Estado estado =Estado.desestimado;
 			//imagen
-			String path ="direccionImagen";
-			String tipo = "tipo";
+			//String path ="direccionImagen";
+			//String tipo = "tipo";
 
-			Unidad buscarUnidad = unidadService.buscarUnidad(codigoUnidad,pisounidad,numerounidad);
-			System.out.println(buscarUnidad.toView());
-			List<PersonaView> dueniosPorUnidad = unidadService.dueniosPorUnidad(codigoUnidad,pisounidad,numerounidad);
-			System.out.println(dueniosPorUnidad);
-			List<PersonaView> inquilinosPorUnidad = unidadService.inquilinosPorUnidad(codigoUnidad,pisounidad,numerounidad);
-			System.out.println(inquilinosPorUnidad);
-			/*
-			//los siguientes 5 metodos no se han probado
-			unidadService.transferirUnidad(codigoUnidad,pisounidad,numerounidad,documento);
-			unidadService.agregarDuenioUnidad(codigoUnidad, pisounidad,numerounidad,documento);
-			unidadService.agregarInquilinoUnidad(codigoUnidad, pisounidad,numerounidad,documento);
-			unidadService.liberarUnidad(codigoUnidad,pisounidad,numerounidad);
-			unidadService.habitarUnidad(codigoUnidad,pisounidad,numerounidad);
+			//Unidad buscarUnidad = unidadService.buscarUnidad(codigoUnidad,pisounidad,numerounidad);
+			//System.out.println(buscarUnidad.toView());
+			//List<PersonaView> dueniosPorUnidad = unidadService.dueniosPorUnidad(codigoUnidad,pisounidad,numerounidad);
+			//System.out.println(dueniosPorUnidad);
+			//List<PersonaView> inquilinosPorUnidad = unidadService.inquilinosPorUnidad(codigoUnidad,pisounidad,numerounidad);
+			//System.out.println(inquilinosPorUnidad);
 
-			 */
+
+
+			//unidadService.transferirUnidad(codigoUnidad,pisounidad,numerounidad,documento);
+
+			//unidadService.agregarDuenioUnidad(codigoUnidad, pisounidad,numerounidad,documento);
+			//unidadService.agregarInquilinoUnidad(codigoUnidad, pisounidad,numerounidad,documento);
+			//System.out.println(unidadService.buscarUnidad(codigoUnidad,pisounidad,numerounidad).estaHabitado());
+		    //unidadService.habitarUnidad(codigoUnidad,pisounidad,numerounidad);
+			//System.out.println(unidadService.buscarUnidad(codigoUnidad,pisounidad,numerounidad).estaHabitado());
+			//unidadService.liberarUnidad(codigoUnidad,pisounidad,numerounidad);
+			//System.out.println(unidadService.buscarUnidad(codigoUnidad,pisounidad,numerounidad).estaHabitado());
+
+
 
 
 

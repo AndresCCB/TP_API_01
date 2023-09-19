@@ -68,7 +68,7 @@ public class EdificioService {
     public List<PersonaView> habitantesPorEdificio(int codigo) throws EdificioException{
         List<PersonaView> resultado = new ArrayList<PersonaView>();
         Edificio edificio = buscarEdificio(codigo);
-        Set<Persona> habitantes = edificio.duenios();
+        Set<Persona> habitantes = edificio.habitantes();
         for(Persona persona : habitantes)
             resultado.add(persona.toView());
         return resultado;
