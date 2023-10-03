@@ -166,13 +166,22 @@ WHERE e.codigo = 1;
 			//System.out.println(dueniosPorUnidad);
 			//List<PersonaView> inquilinosPorUnidad = unidadService.inquilinosPorUnidad(codigoUnidad,pisounidad,numerounidad);
 			//System.out.println(inquilinosPorUnidad);
+//unidad
+		//int codigoEdificioUnidad = 1;
+		//String pisounidad = "10";
+		//String numerounidad ="5";
+
+
+		//	unidadService.transferirUnidad(codigoEdificioUnidad,pisounidad,numerounidad,"123456");
+
+			//unidadService.agregarDuenioUnidad(codigoEdificioUnidad, pisounidad,numerounidad,documento);
+
+
+		  //personaService.agregarPersona("123456","Andres");
 
 
 
-			//unidadService.transferirUnidad(codigoUnidad,pisounidad,numerounidad,documento);
-
-			//unidadService.agregarDuenioUnidad(codigoUnidad, pisounidad,numerounidad,documento);
-			//unidadService.agregarInquilinoUnidad(codigoUnidad, pisounidad,numerounidad,documento);
+			//unidadService.agregarInquilinoUnidad(codigoUnidad, pisounidad,numerounidad,"123456");
 			//System.out.println(unidadService.buscarUnidad(codigoUnidad,pisounidad,numerounidad).estaHabitado());
 		    //unidadService.habitarUnidad(codigoUnidad,pisounidad,numerounidad);
 			//System.out.println(unidadService.buscarUnidad(codigoUnidad,pisounidad,numerounidad).estaHabitado());

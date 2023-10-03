@@ -18,7 +18,8 @@ public class ImagenService {
     }
 
 
-    public void guardarimagen(Imagen imagen){
-        imagenRepository.save(imagen);
+    public Imagen guardarimagen(Imagen imagen){
+        return imagenRepository.save(imagen);
+
     }
 }

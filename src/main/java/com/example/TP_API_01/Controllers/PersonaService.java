@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -36,6 +37,10 @@ public class PersonaService {
     public void eliminarPersona(String documento) throws PersonaException{
         Persona persona = buscarPersona(documento);
         personaRepository.delete(persona);
+    }
+
+    public List<Persona> listarPersonas(){
+        return personaRepository.findAll();
     }
 
 }
