@@ -23,9 +23,11 @@ public class Unidad {
     private String numero;
     @Column(name = "habitado", length = 1, nullable = false)
     private boolean habitado;
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name= "codigoedificio")
     private Edificio edificio;
+
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "duenios",
@@ -40,6 +42,8 @@ public class Unidad {
             inverseJoinColumns = @JoinColumn(name = "documento")
     )
     private List<Persona> inquilinos;
+
+
 
     public Unidad() {
     }
@@ -114,9 +118,13 @@ public class Unidad {
         return duenios;
     }
 
+
+
     public List<Persona> getInquilinos() {
         return inquilinos;
     }
+
+
 
     public UnidadView toView() {
         EdificioView auxEdificio = edificio.toView();

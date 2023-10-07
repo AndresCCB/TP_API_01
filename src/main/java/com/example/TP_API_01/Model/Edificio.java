@@ -1,6 +1,7 @@
 package com.example.TP_API_01.Model;
 
 import com.example.TP_API_01.Views.EdificioView;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 
@@ -23,6 +24,7 @@ public class Edificio {
     private String direccion;
 
     @OneToMany(mappedBy = "edificio", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JsonIgnore
     private List<Unidad> unidades;
 
     public Edificio() {unidades = new ArrayList<>();}
@@ -51,6 +53,8 @@ public class Edificio {
         return habilitados;
     }
 
+
+
     public int getCodigo() {
         return codigo;
     }
@@ -78,6 +82,7 @@ public class Edificio {
         return resultado;
     }
 
+
     public Set<Persona> habitantes() {
         Set<Persona> resultado = new HashSet<Persona>();
         for(Unidad unidad : unidades) {
@@ -95,6 +100,7 @@ public class Edificio {
         }
         return resultado;
     }
+
 
 
     public EdificioView toView() {

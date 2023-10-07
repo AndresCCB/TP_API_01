@@ -48,6 +48,7 @@ public class EdificioService {
             throw new EdificioException("El edificio con el código " + codigo + " no existe.");
         }
     }
+
     public List<PersonaView> habilitadosPorEdificio(int codigo) throws EdificioException{
         List<PersonaView> resultado = new ArrayList<PersonaView>();
         Edificio edificio = buscarEdificio(codigo);
@@ -65,6 +66,8 @@ public class EdificioService {
         return resultado;
     }
 
+
+
     public List<PersonaView> habitantesPorEdificio(int codigo) throws EdificioException{
         List<PersonaView> resultado = new ArrayList<PersonaView>();
         Edificio edificio = buscarEdificio(codigo);
@@ -73,6 +76,8 @@ public class EdificioService {
             resultado.add(persona.toView());
         return resultado;
     }
+
+
     public List<EdificioView> obtenerEdificios(){
         List<Edificio> edificios = edificioRepository.findAll();
         List<EdificioView> resultado = new ArrayList<>();

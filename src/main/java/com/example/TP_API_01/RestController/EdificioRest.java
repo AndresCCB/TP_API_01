@@ -34,10 +34,13 @@ public class EdificioRest {
         return edificioService.getUnidadesPorEdificio(id);
     }
 
+
     @GetMapping("/buscarHabilitadosPorEdificio/{id}")
     public List<PersonaView> buscarHabilitadosPorEdificio(@PathVariable("id") int id) throws EdificioException {
         return edificioService.habilitadosPorEdificio(id);
     }
+
+
 
     @GetMapping("/buscarDueniosPorEdificio/{id}")
     public List<PersonaView> buscarDueniosPorEdificio(@PathVariable("id") int id) throws EdificioException {
@@ -47,4 +50,6 @@ public class EdificioRest {
     public List<PersonaView> buscarHabitantesPorEdificio(@PathVariable("id") int id) throws EdificioException {
         return edificioService.habitantesPorEdificio(id);
     }
+
+
 }

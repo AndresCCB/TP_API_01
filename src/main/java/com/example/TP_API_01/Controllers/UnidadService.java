@@ -33,6 +33,10 @@ public class UnidadService {
 
 
 
+    public List<Unidad> ListarUnidades(){
+        return unidadRepository.findAll();
+    }
+
     public Unidad buscarUnidad(Integer codigo, String piso, String numero) throws UnidadException {
         Optional<Unidad> optionalEdificio = unidadRepository.findByEdificioCodigoAndPisoAndNumero(codigo, piso, numero);
 
@@ -43,8 +47,9 @@ public class UnidadService {
         }
     }
 
+
     public List<PersonaView> dueniosPorUnidad(int codigo, String piso, String numero) throws UnidadException {
-        List<PersonaView> resultado = new ArrayList<PersonaView>();
+        List<PersonaView> resultado = new ArrayList<>();
         Unidad unidad = buscarUnidad(codigo, piso, numero);
         List<Persona> duenios = unidad.getDuenios();
         for(Persona persona : duenios)
@@ -53,13 +58,15 @@ public class UnidadService {
     }
 
     public List<PersonaView> inquilinosPorUnidad(int codigo, String piso, String numero) throws UnidadException{
-        List<PersonaView> resultado = new ArrayList<PersonaView>();
+        List<PersonaView> resultado = new ArrayList<>();
         Unidad unidad = buscarUnidad(codigo, piso, numero);
         List<Persona> inquilinos = unidad.getInquilinos();
         for(Persona persona : inquilinos)
             resultado.add(persona.toView());
         return resultado;
     }
+
+
 
     public void transferirUnidad(int codigo, String piso, String numero, String documento) throws UnidadException, PersonaException {
         Unidad unidad = buscarUnidad(codigo, piso, numero);
