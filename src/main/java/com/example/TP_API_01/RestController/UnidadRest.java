@@ -1,6 +1,7 @@
 package com.example.TP_API_01.RestController;
 
 import com.example.TP_API_01.Controllers.UnidadService;
+import com.example.TP_API_01.Exceptions.EdificioException;
 import com.example.TP_API_01.Exceptions.PersonaException;
 import com.example.TP_API_01.Exceptions.UnidadException;
 import com.example.TP_API_01.Model.Unidad;
@@ -54,14 +55,19 @@ public class UnidadRest {
     public void AgregarInquilinoUnidad(@RequestParam Integer codigo, @RequestParam String piso, @RequestParam String numero, @RequestParam String documento) throws PersonaException, UnidadException {
         unidadService.agregarInquilinoUnidad(codigo,piso,numero,documento);
     }
-    @PutMapping(value = "/habitarUnidad")
-    public void HabitarUnidad(@RequestParam Integer codigo, @RequestParam String piso, @RequestParam String numero) throws  UnidadException {
-        unidadService.habitarUnidad(codigo,piso,numero);
-    }
+
     @PutMapping(value = "/liberarUnidad")
     public void LiberarUnidad(@RequestParam Integer codigo, @RequestParam String piso, @RequestParam String numero) throws UnidadException {
         unidadService.liberarUnidad(codigo,piso,numero);
     }
 
 
+    @PostMapping(value = "/agregarUnidad")
+    public Unidad agregarUnidad(@RequestParam Integer codigo, @RequestParam String piso, @RequestParam String numero) throws EdificioException {
+        return  unidadService.agregarUnidad(codigo,piso,numero);
+    }
+    @DeleteMapping(value="/eliminarUnidad")
+    public void eliminarUnidad(@RequestParam Integer codigo, @RequestParam String piso, @RequestParam String numero) throws UnidadException {
+        unidadService.eliminarUnidad(codigo,piso,numero);
+    }
 }

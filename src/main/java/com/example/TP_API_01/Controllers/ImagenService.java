@@ -22,4 +22,7 @@ public class ImagenService {
         return imagenRepository.save(imagen);
 
     }
+    public void eliminarImagen(Integer numero){
+        imagenRepository.delete(imagenRepository.getReferenceById(numero));
+    }
 }

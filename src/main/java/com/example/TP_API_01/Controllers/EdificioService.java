@@ -87,4 +87,11 @@ public class EdificioService {
         return resultado;
     }
 
+    public Edificio agregarEdificio(Edificio edificio){
+        return edificioRepository.save(edificio);
+    }
+    public void eliminarEdificio(Edificio edificio){
+        edificioRepository.delete(edificio);
+    }
+
 }

@@ -2,6 +2,7 @@ package com.example.TP_API_01.RestController;
 
 import com.example.TP_API_01.Controllers.EdificioService;
 import com.example.TP_API_01.Exceptions.EdificioException;
+import com.example.TP_API_01.Exceptions.PersonaException;
 import com.example.TP_API_01.Model.Edificio;
 import com.example.TP_API_01.Model.Persona;
 import com.example.TP_API_01.Model.Unidad;
@@ -51,5 +52,13 @@ public class EdificioRest {
         return edificioService.habitantesPorEdificio(id);
     }
 
-
+    @PostMapping("/agregarEdificio")
+    public EdificioView agregarEdificio(@RequestBody Edificio edificio) throws EdificioException {
+        edificioService.agregarEdificio(edificio);
+        return edificioService.buscarEdificio(edificio.getCodigo()).toView();
+    }
+    @DeleteMapping("/eliminarEdificio/{id}")
+    public void eliminarEdificio(@PathVariable("id") int id) throws  EdificioException{
+        edificioService.eliminarEdificio(edificioService.buscarEdificio(id));
+    }
 }

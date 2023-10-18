@@ -1,12 +1,16 @@
 package com.example.TP_API_01.Controllers;
 
 
+import com.example.TP_API_01.Exceptions.EdificioException;
 import com.example.TP_API_01.Exceptions.PersonaException;
 import com.example.TP_API_01.Exceptions.UnidadException;
+import com.example.TP_API_01.Model.Edificio;
 import com.example.TP_API_01.Model.Persona;
 import com.example.TP_API_01.Model.Unidad;
+import com.example.TP_API_01.Repositories.EdificioRepository;
 import com.example.TP_API_01.Repositories.PersonaRepository;
 import com.example.TP_API_01.Repositories.UnidadRepository;
+import com.example.TP_API_01.Views.EdificioView;
 import com.example.TP_API_01.Views.PersonaView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,19 +35,22 @@ public class UnidadService {
     @Autowired
     PersonaRepository personaRepository;
 
+    @Autowired
+    EdificioService edificioService;
+
 
 
     public List<Unidad> ListarUnidades(){
         return unidadRepository.findAll();
     }
 
-    public Unidad buscarUnidad(Integer codigo, String piso, String numero) throws UnidadException {
-        Optional<Unidad> optionalEdificio = unidadRepository.findByEdificioCodigoAndPisoAndNumero(codigo, piso, numero);
+    public Unidad buscarUnidad(Integer codigoEdificio, String piso, String numero) throws UnidadException {
+        Optional<Unidad> optionalUnidad = unidadRepository.findByEdificioCodigoAndPisoAndNumero(codigoEdificio, piso, numero);
 
-        if (optionalEdificio.isPresent()) {
-            return optionalEdificio.get();
+        if (optionalUnidad.isPresent()) {
+            return optionalUnidad.get();
         } else {
-            throw new UnidadException("La unidad con código de edificio " + codigo + ", piso " + piso + " y número " + numero + " no existe.");
+            throw new UnidadException("La unidad con código de edificio " + codigoEdificio + ", piso " + piso + " y número " + numero + " no existe.");
         }
     }
 
@@ -112,5 +119,15 @@ public class UnidadService {
         unidadRepository.save(unidad);
     }
 
+    public Unidad agregarUnidad(int codigo, String piso, String numero) throws EdificioException {
+            Unidad unidad = new Unidad();
+            unidad.setEdificio(edificioService.buscarEdificio(codigo));
+            unidad.setPiso(piso);
+            unidad.setNumero(numero);
+             return unidadRepository.save(unidad);
+    }
+    public void eliminarUnidad(int codigo, String piso, String numero) throws  UnidadException{
+        unidadRepository.delete(buscarUnidad(codigo,piso,numero));
+    }
 
 }
