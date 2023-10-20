@@ -35,4 +35,18 @@ public class PersonaRest {
         personaService.agregarPersona(persona.getDocumento(), persona.getNombre());
         return personaService.buscarPersona(persona.getDocumento()).toView();
     }
+    @PutMapping("/registrarUsuario")
+    public void registrarUsuario(@RequestParam String documento,@RequestParam String mail, @RequestParam String password) throws PersonaException {
+        personaService.RegistroUsuario(documento, mail, password);
+    }
+
+    @GetMapping("/validacionIngreso")
+    public Boolean validacionIngreso(@RequestParam String mail, @RequestParam String password){
+        return personaService.ValidacionIngreso(mail, password);
+    }
+
+    @GetMapping("/esAdmin")
+    public Boolean esAdmin(@RequestParam String mail, @RequestParam String password){
+        return personaService.esAdmin(mail, password);
+    }
 }

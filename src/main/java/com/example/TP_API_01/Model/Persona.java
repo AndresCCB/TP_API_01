@@ -50,4 +50,8 @@ public class Persona {
     public PersonaView toView() {
         return new PersonaView(documento, nombre);
     }
+
+    public void setMail(String mail) {
+        this.mail = mail;
+    }
 }
