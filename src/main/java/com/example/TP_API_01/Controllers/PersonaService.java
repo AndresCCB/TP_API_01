@@ -57,11 +57,13 @@ public class PersonaService {
     }
 
     public Boolean ValidacionIngreso(String Mail, String Password){
-        return personaRepository.findByMailAndPassword(Mail, Password).isPresent();
+        return personaRepository.findByMailAndContrasenia(Mail, Password) != null;
+
+
     }
 
     public Boolean esAdmin(String Mail, String Password){
-        Persona persona= personaRepository.findByMailAndPassword(Mail, Password).get();
-        return administradorRepository.findByDocumento(persona.getDocumento()).isPresent();
+        Persona persona= personaRepository.findByMailAndContrasenia(Mail, Password);
+        return administradorRepository.findByDocumento_Documento(persona.getDocumento())!= null;
     }
 }

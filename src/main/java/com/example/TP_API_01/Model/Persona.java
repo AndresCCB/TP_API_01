@@ -15,7 +15,7 @@ public class Persona {
     @Column(name = "mail", length = 100)
     private String mail;
     @Column(name = "contrasenia", length = 100)
-    private String Contrasenia;
+    private String contrasenia;
 
     public Persona() {}
 
@@ -23,11 +23,11 @@ public class Persona {
         this.documento = documento;
         this.nombre = nombre;
         this.mail = mail;
-        this.Contrasenia = contrasenia;
+        this.contrasenia = contrasenia;
     }
 
     public void cambiarPassword(String contrasenia) {
-        this.Contrasenia = contrasenia;
+        this.contrasenia = contrasenia;
     }
 
     public String getDocumento() {
@@ -44,7 +44,7 @@ public class Persona {
     }
 
     public String getContrasenia() {
-        return Contrasenia;
+        return contrasenia;
     }
 
     public PersonaView toView() {

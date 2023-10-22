@@ -2,6 +2,8 @@ package com.example.TP_API_01.Model;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+
 @Entity
 @Table(name ="administradores")
 public class Administrador {
@@ -10,13 +12,13 @@ public class Administrador {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "documento", referencedColumnName = "id")
-    private String documento;
+    @JoinColumn(name = "documento", referencedColumnName = "documento")
+    private Persona documento;
 
     public Administrador() {
     }
 
-    public Administrador(Integer id, String documento) {
+    public Administrador(Integer id, Persona documento) {
         this.id = id;
         this.documento = documento;
     }
@@ -29,11 +31,11 @@ public class Administrador {
         this.id = id;
     }
 
-    public String getDocumento() {
+    public Persona getDocumento() {
         return documento;
     }
 
-    public void setDocumento(String documento) {
+    public void setDocumento(Persona documento) {
         this.documento = documento;
     }
 }
