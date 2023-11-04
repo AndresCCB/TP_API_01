@@ -4,14 +4,12 @@ package com.example.TP_API_01.Controllers;
 import com.example.TP_API_01.Exceptions.EdificioException;
 import com.example.TP_API_01.Exceptions.PersonaException;
 import com.example.TP_API_01.Exceptions.UnidadException;
-import com.example.TP_API_01.Model.Edificio;
 import com.example.TP_API_01.Model.Persona;
 import com.example.TP_API_01.Model.Unidad;
-import com.example.TP_API_01.Repositories.EdificioRepository;
 import com.example.TP_API_01.Repositories.PersonaRepository;
 import com.example.TP_API_01.Repositories.UnidadRepository;
-import com.example.TP_API_01.Views.EdificioView;
 import com.example.TP_API_01.Views.PersonaView;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -101,8 +99,10 @@ public class UnidadService {
 
     public void agregarInquilinoUnidad(int codigo, String piso, String numero, String documento) throws UnidadException, PersonaException{
         Unidad unidad = buscarUnidad(codigo, piso, numero);
+
         Persona persona = personaService.buscarPersona(documento);
         unidad.agregarInquilino(persona);
+        unidad.habitar();
         unidadRepository.save(unidad);
         personaRepository.save(persona);
     }
@@ -113,11 +113,7 @@ public class UnidadService {
         unidadRepository.save(unidad);
     }
 
-    public void habitarUnidad(int codigo, String piso, String numero) throws UnidadException {
-        Unidad unidad = buscarUnidad(codigo, piso, numero);
-        unidad.habitar();
-        unidadRepository.save(unidad);
-    }
+
 
     public Unidad agregarUnidad(int codigo, String piso, String numero) throws EdificioException {
             Unidad unidad = new Unidad();
@@ -126,8 +122,10 @@ public class UnidadService {
             unidad.setNumero(numero);
              return unidadRepository.save(unidad);
     }
-    public void eliminarUnidad(int codigo, String piso, String numero) throws  UnidadException{
-        unidadRepository.delete(buscarUnidad(codigo,piso,numero));
+    @Transactional
+    public void eliminarUnidad(Integer identificador) throws  UnidadException{
+        Optional<Unidad> unidad= unidadRepository.findById(identificador);
+        unidadRepository.delete(unidad.get());
     }
 
 }

@@ -103,6 +103,7 @@ public class ReclamoView {
                 ", descripcion='" + descripcion + '\'' +
                 ", unidad=" + unidad +
                 ", estado=" + estado +
+                ", imagenes=" + imagenes +
                 '}';
     }
 }

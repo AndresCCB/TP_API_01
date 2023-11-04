@@ -66,8 +66,10 @@ public class UnidadRest {
     public Unidad agregarUnidad(@RequestParam Integer codigo, @RequestParam String piso, @RequestParam String numero) throws EdificioException {
         return  unidadService.agregarUnidad(codigo,piso,numero);
     }
+
+    //No funciona el delete
     @DeleteMapping(value="/eliminarUnidad")
-    public void eliminarUnidad(@RequestParam Integer codigo, @RequestParam String piso, @RequestParam String numero) throws UnidadException {
-        unidadService.eliminarUnidad(codigo,piso,numero);
+    public void eliminarUnidad(@RequestParam Integer identificador) throws UnidadException {
+        unidadService.eliminarUnidad(identificador);
     }
 }

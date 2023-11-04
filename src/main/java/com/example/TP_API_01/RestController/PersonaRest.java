@@ -4,6 +4,7 @@ import com.example.TP_API_01.Controllers.PersonaService;
 import com.example.TP_API_01.Exceptions.PersonaException;
 import com.example.TP_API_01.Model.Persona;
 import com.example.TP_API_01.Repositories.PersonaRepository;
+import com.example.TP_API_01.Repositories.ReclamoRepository;
 import com.example.TP_API_01.Views.PersonaView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -15,6 +16,7 @@ import java.util.List;
 public class PersonaRest {
     @Autowired
     PersonaService personaService;
+
 
     @GetMapping("/listarPersonas")
     public List<Persona> getPersonas(){

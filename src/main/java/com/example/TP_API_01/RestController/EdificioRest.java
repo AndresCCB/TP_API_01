@@ -59,6 +59,6 @@ public class EdificioRest {
     }
     @DeleteMapping("/eliminarEdificio/{id}")
     public void eliminarEdificio(@PathVariable("id") int id) throws  EdificioException{
-        edificioService.eliminarEdificio(edificioService.buscarEdificio(id));
+        edificioService.eliminarEdificio(id);
     }
 }

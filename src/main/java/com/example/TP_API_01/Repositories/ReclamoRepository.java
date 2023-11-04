@@ -15,5 +15,5 @@ public interface ReclamoRepository extends JpaRepository<Reclamo, Integer> {
     List<Reclamo> findByUnidad(Unidad unidad);
 
 
-
+    void deleteByPersona(Persona persona);
 }

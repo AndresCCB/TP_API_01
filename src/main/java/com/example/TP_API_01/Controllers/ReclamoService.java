@@ -5,7 +5,6 @@ import com.example.TP_API_01.Exceptions.PersonaException;
 import com.example.TP_API_01.Exceptions.ReclamoException;
 import com.example.TP_API_01.Exceptions.UnidadException;
 import com.example.TP_API_01.Model.*;
-import com.example.TP_API_01.Repositories.ImagenRepository;
 import com.example.TP_API_01.Repositories.ReclamoRepository;
 import com.example.TP_API_01.Views.Estado;
 import com.example.TP_API_01.Views.ReclamoView;
@@ -57,16 +56,6 @@ public class ReclamoService {
         return resultado;
     }
 
-    public ReclamoView reclamosPorNumero(int numero) throws ReclamoException {
-        Optional<Reclamo> reclamoOptional = reclamoRepository.findById(numero);
-
-        if (reclamoOptional.isPresent()) {
-            Reclamo reclamo = reclamoOptional.get();
-            return reclamo.toView();
-        } else {
-            throw new ReclamoException("No se encontró ningún reclamo con el número: " + numero);
-        }
-    }
 
     public List<ReclamoView> reclamosPorPersona(String documento) throws PersonaException {
         Persona persona = personaService.buscarPersona(documento);
@@ -87,10 +76,14 @@ public class ReclamoService {
         return reclamo;
     }
 
-    public void agregarImagenAReclamo(int numero, String direccion, String tipo) throws ReclamoException {
-        Reclamo reclamo = buscarReclamo(numero);
-        reclamo.agregarImagen(direccion, tipo);
-        reclamoRepository.save(reclamo);
+    public void agregarImagenAReclamo(Integer numero,Imagen imagen) throws ReclamoException {
+        Optional<Reclamo> reclamo = reclamoRepository.findById(numero);
+        if(reclamo.isPresent()){
+            reclamo.get().agregarImagen(imagen);
+            reclamoRepository.save(reclamo.get());
+            imagenService.guardarimagen(imagen);
+        }else{throw  new ReclamoException("El reclamo no existe");}
+
 
     }
     public void cambiarEstado(int numero, Estado estado) throws ReclamoException {
@@ -108,4 +101,8 @@ public class ReclamoService {
         }
 
     }
+    public void eliminarReclamo(Reclamo reclamo){
+        reclamoRepository.delete(reclamo);
+    }
+
 }

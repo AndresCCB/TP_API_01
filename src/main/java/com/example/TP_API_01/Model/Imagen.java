@@ -23,9 +23,11 @@ public class Imagen {
     public Imagen() {
     }
 
-    public Imagen(String path, String tipo) {
+    public Imagen(Integer numero, String path, String tipo) {
+        this.numero = numero;
         this.path = path;
         this.tipo = tipo;
+        this.reclamo = reclamo;
     }
 
     public int getNumero() {

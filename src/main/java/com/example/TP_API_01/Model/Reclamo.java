@@ -19,7 +19,7 @@ public class Reclamo {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idreclamo")
     private Integer numero;
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name = "documento")
     private Persona persona;
     @ManyToOne(fetch = FetchType.EAGER)
@@ -41,6 +41,8 @@ public class Reclamo {
 
     public Reclamo() {imagenes = new ArrayList<Imagen>(); }
 
+
+
     public Reclamo(Persona persona, Edificio edificio, String ubicacion, String descripcion, Unidad unidad) {
         this.persona = persona;
         this.edificio = edificio;
@@ -51,8 +53,7 @@ public class Reclamo {
         imagenes = new ArrayList<Imagen>();
     }
 
-    public void agregarImagen(String direccion, String tipo) {
-        Imagen imagen = new Imagen(direccion, tipo);
+    public void agregarImagen(Imagen imagen) {
         imagenes.add(imagen);
     }
 
@@ -94,6 +95,10 @@ public class Reclamo {
 
     public void cambiarEstado(Estado estado) {
         this.estado = estado;
+    }
+
+    public void setPersona(Persona persona) {
+        this.persona = persona;
     }
 
     public ReclamoView toView() {

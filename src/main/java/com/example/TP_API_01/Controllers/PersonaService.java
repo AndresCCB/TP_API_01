@@ -2,8 +2,11 @@ package com.example.TP_API_01.Controllers;
 
 import com.example.TP_API_01.Exceptions.PersonaException;
 import com.example.TP_API_01.Model.Persona;
+import com.example.TP_API_01.Model.Reclamo;
 import com.example.TP_API_01.Repositories.AdministradorRepository;
 import com.example.TP_API_01.Repositories.PersonaRepository;
+import com.example.TP_API_01.Repositories.ReclamoRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,11 +19,16 @@ public class PersonaService {
 
     private final PersonaRepository personaRepository;
     private final AdministradorRepository administradorRepository;
+    private final ReclamoRepository reclamoRepository;
+
+
 
     @Autowired
-    public PersonaService(PersonaRepository personaRepository, AdministradorRepository administradorRepository) {
+    public PersonaService(PersonaRepository personaRepository, AdministradorRepository administradorRepository, ReclamoRepository reclamoRepository) {
         this.personaRepository = personaRepository;
         this.administradorRepository = administradorRepository;
+        this.reclamoRepository= reclamoRepository;
+
     }
 
 
@@ -38,10 +46,20 @@ public class PersonaService {
         return personaRepository.save(persona);
 
     }
-
+    @Transactional
     public void eliminarPersona(String documento) throws PersonaException{
+
         Persona persona = buscarPersona(documento);
-        personaRepository.delete(persona);
+
+        if (persona != null) {
+            // Elimina los reclamos sin asignar explícitamente una persona dummy
+            reclamoRepository.deleteByPersona(persona);
+
+            // Elimina la persona
+            personaRepository.delete(persona);
+        } else {
+            throw new PersonaException("Persona no encontrada");
+        }
     }
 
     public List<Persona> listarPersonas(){
@@ -50,10 +68,13 @@ public class PersonaService {
 
 
     public void RegistroUsuario(String Documento, String Mail, String Password) throws PersonaException {
-        Persona persona= buscarPersona(Documento);
-        persona.setMail(Mail);
-        persona.cambiarPassword(Password);
-        personaRepository.save(persona);
+        Optional<Persona> persona= personaRepository.findById(Documento);
+        if(persona.isPresent()){
+            persona.get().setMail(Mail);
+            persona.get().cambiarPassword(Password);
+            personaRepository.save(persona.get());
+        }else{throw new PersonaException("La persona no existe");}
+
     }
 
     public Boolean ValidacionIngreso(String Mail, String Password){

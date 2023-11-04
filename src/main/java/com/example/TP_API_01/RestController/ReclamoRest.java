@@ -7,11 +7,9 @@ import com.example.TP_API_01.Exceptions.ReclamoException;
 import com.example.TP_API_01.Exceptions.UnidadException;
 import com.example.TP_API_01.Model.Imagen;
 import com.example.TP_API_01.Model.Reclamo;
-import com.example.TP_API_01.Model.Unidad;
 import com.example.TP_API_01.Views.Estado;
 import com.example.TP_API_01.Views.ReclamoView;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,8 +22,8 @@ public class ReclamoRest {
     ReclamoService reclamoService;
 
     @GetMapping("/buscarReclamosPorEdificio/{id}")
-    public List<ReclamoView> reclamosPorEdificio(@PathVariable ("id") int id){
-        return reclamoService.reclamosPorEdificio(id);
+    public List<ReclamoView> reclamosPorEdificio(@PathVariable ("id") int codigoEdificio){
+        return reclamoService.reclamosPorEdificio(codigoEdificio);
     }
 
 
@@ -37,26 +35,31 @@ public class ReclamoRest {
 
 
 
-    @GetMapping("/buscarReclamos/{id}")
-    public ReclamoView buscarReclamos(@PathVariable ("id") int id) throws ReclamoException {
-        return reclamoService.reclamosPorNumero(id);
+    @GetMapping("/buscarReclamo/{id}")
+    public Reclamo buscarReclamo(@PathVariable ("id") int numero) throws ReclamoException {
+        return reclamoService.buscarReclamo(numero);
     }
 
     @GetMapping("/buscarReclamosPorPersona/{id}")
-    public List<ReclamoView> reclamosPorPersona(@PathVariable ("id") String id) throws PersonaException {
-        return reclamoService.reclamosPorPersona(id);
+    public List<ReclamoView> reclamosPorPersona(@PathVariable ("id") String documento) throws PersonaException {
+        return reclamoService.reclamosPorPersona(documento);
     }
 
     @PostMapping("/agregarReclamo")
     public Reclamo agregarReclamo(@RequestParam String documento,@RequestParam Integer codigo, @RequestParam String ubicacion, @RequestParam String descripcion, @RequestParam Integer identificador, @RequestParam String piso, @RequestParam String numeroUnidad) throws PersonaException, UnidadException, EdificioException {
         return reclamoService.agregarReclamo(codigo,identificador,piso,numeroUnidad,documento,ubicacion,descripcion);
     }
-    @PostMapping("/agregarImagenaReclamo/{id}")
-    public void agregarImagenAReclamo(@RequestBody Imagen imagen) throws ReclamoException {
-        reclamoService.agregarImagenAReclamo(imagen.getNumero(), imagen.getPath(),imagen.getTipo());
+    @PutMapping("/agregarImagenaReclamo/{id}")
+    public void agregarImagenAReclamo(@PathVariable ("id") Integer id, @RequestBody Imagen imagen) throws ReclamoException {
+        reclamoService.agregarImagenAReclamo(id,imagen);
     }
     @PutMapping("/cambiarEstadoReclamo/{id}")
-    public void cambiarEstadoReclamo(@PathVariable("id") int id, @RequestParam("estado")Estado estado) throws ReclamoException {
+    public void cambiarEstadoReclamo(@PathVariable("id") int id, @RequestParam Estado estado) throws ReclamoException {
         reclamoService.cambiarEstado(id,estado);
+    }
+    @DeleteMapping("/eliminarReclamo")
+    public void eliminarReclamoPorPersona(@RequestParam Integer numero) throws ReclamoException {
+        Reclamo reclamo = reclamoService.buscarReclamo(numero);
+        reclamoService.eliminarReclamo(reclamo);
     }
 }

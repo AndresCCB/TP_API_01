@@ -8,4 +8,5 @@ import java.util.Optional;
 public interface UnidadRepository extends JpaRepository<Unidad, Integer> {
     Optional<Unidad> findByEdificioCodigoAndPisoAndNumero(int codigoEdificio, String piso, String numero);
 
+
 }

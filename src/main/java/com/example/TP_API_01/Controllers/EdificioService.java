@@ -2,13 +2,16 @@ package com.example.TP_API_01.Controllers;
 
 
 import com.example.TP_API_01.Exceptions.EdificioException;
+import com.example.TP_API_01.Exceptions.PersonaException;
 import com.example.TP_API_01.Model.Edificio;
 import com.example.TP_API_01.Model.Persona;
 import com.example.TP_API_01.Model.Unidad;
 import com.example.TP_API_01.Repositories.EdificioRepository;
+import com.example.TP_API_01.Repositories.UnidadRepository;
 import com.example.TP_API_01.Views.EdificioView;
 import com.example.TP_API_01.Views.PersonaView;
 import com.example.TP_API_01.Views.UnidadView;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,10 +24,12 @@ import java.util.Set;
 public class EdificioService {
 
     private final EdificioRepository edificioRepository;
+    private final UnidadRepository unidadRepository;
 
     @Autowired
-    public EdificioService(EdificioRepository edificioRepository){
+    public EdificioService(EdificioRepository edificioRepository, UnidadRepository unidadRepository){
         this.edificioRepository = edificioRepository;
+        this.unidadRepository = unidadRepository;
     }
 
     public List<UnidadView> getUnidadesPorEdificio(int codigo) throws EdificioException {
@@ -90,8 +95,22 @@ public class EdificioService {
     public Edificio agregarEdificio(Edificio edificio){
         return edificioRepository.save(edificio);
     }
-    public void eliminarEdificio(Edificio edificio){
-        edificioRepository.delete(edificio);
-    }
+    @Transactional
+    public void eliminarEdificio(Integer codigo) throws EdificioException {
+            Edificio edificio=buscarEdificio(codigo);
+            if (edificio != null) {
+                List<Unidad> unidades =edificio.getUnidades();
+                for (Unidad unidad: unidades) {
+                    unidadRepository.delete(unidad);
+                }
+
+
+
+                edificioRepository.delete(edificio);
+            } else {
+                throw new EdificioException("Edificio no encontrada");
+            }
+        }
+
 
 }
