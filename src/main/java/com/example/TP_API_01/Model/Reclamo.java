@@ -6,6 +6,7 @@ import com.example.TP_API_01.Views.EdificioView;
 import com.example.TP_API_01.Views.Estado;
 import com.example.TP_API_01.Views.ImagenView;
 import com.example.TP_API_01.Views.ReclamoView;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
@@ -36,6 +37,7 @@ public class Reclamo {
     @Transient
     private Estado estado;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "reclamo", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Imagen> imagenes;
 

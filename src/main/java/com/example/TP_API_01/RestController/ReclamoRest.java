@@ -46,8 +46,8 @@ public class ReclamoRest {
     }
 
     @PostMapping("/agregarReclamo")
-    public Reclamo agregarReclamo(@RequestParam String documento,@RequestParam Integer codigo, @RequestParam String ubicacion, @RequestParam String descripcion, @RequestParam Integer identificador, @RequestParam String piso, @RequestParam String numeroUnidad) throws PersonaException, UnidadException, EdificioException {
-        return reclamoService.agregarReclamo(codigo,identificador,piso,numeroUnidad,documento,ubicacion,descripcion);
+    public Reclamo agregarReclamo(@RequestParam String documento,@RequestParam Integer codigoEdificio, @RequestParam String ubicacion, @RequestParam String descripcion, @RequestParam String piso, @RequestParam String numeroUnidad) throws PersonaException, UnidadException, EdificioException {
+        return reclamoService.agregarReclamo(codigoEdificio,piso,numeroUnidad,documento,ubicacion,descripcion);
     }
     @PutMapping("/agregarImagenaReclamo/{id}")
     public void agregarImagenAReclamo(@PathVariable ("id") Integer id, @RequestBody Imagen imagen) throws ReclamoException {

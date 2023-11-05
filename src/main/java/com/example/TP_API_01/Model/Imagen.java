@@ -23,8 +23,7 @@ public class Imagen {
     public Imagen() {
     }
 
-    public Imagen(Integer numero, String path, String tipo) {
-        this.numero = numero;
+    public Imagen( String path, String tipo, Reclamo reclamo) {
         this.path = path;
         this.tipo = tipo;
         this.reclamo = reclamo;
@@ -56,6 +55,10 @@ public class Imagen {
 
     public void setReclamo(Reclamo reclamo) {
         this.reclamo = reclamo;
+    }
+
+    public Reclamo getReclamo() {
+        return reclamo;
     }
 
     public ImagenView toView(){

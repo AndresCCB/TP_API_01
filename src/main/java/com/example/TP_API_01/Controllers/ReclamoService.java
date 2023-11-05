@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class ReclamoService {
@@ -67,21 +68,34 @@ public class ReclamoService {
         return resultado;
     }
 
-    public Reclamo agregarReclamo(int codigoedificio, int codigounidad, String piso, String numero, String documento, String ubicacion, String descripcion) throws  UnidadException, PersonaException, EdificioException {
-        Edificio edificio = edificioService.buscarEdificio(codigoedificio);
-        Unidad unidad = unidadService.buscarUnidad(codigounidad, piso, numero);
+    public Reclamo agregarReclamo(int codigoEdificio, String piso, String numero, String documento, String ubicacion, String descripcion) throws UnidadException, PersonaException, EdificioException {
+
+        Edificio edificio = edificioService.buscarEdificio(codigoEdificio);
+        Unidad unidad = unidadService.buscarUnidad(codigoEdificio, piso, numero);
         Persona persona = personaService.buscarPersona(documento);
+
+        Set<Persona> habilitadosEnEdificio = edificio.habilitados();
+
+        if (!habilitadosEnEdificio.contains(persona)) {
+            throw new RuntimeException("La persona no vive en el edificio especificado.");
+        }
+        if(!unidad.getDuenios().contains(persona) && !unidad.getInquilinos().contains(persona)){
+            throw new RuntimeException("La persona no vive o no es dueña de la unidad especificada.");
+        }
+
         Reclamo reclamo = new Reclamo(persona, edificio, ubicacion, descripcion, unidad);
         reclamoRepository.save(reclamo);
+
         return reclamo;
     }
 
+//al agregar una imagen al reclamo duplica la imagen una con el id del reclamo y una sin el
     public void agregarImagenAReclamo(Integer numero,Imagen imagen) throws ReclamoException {
         Optional<Reclamo> reclamo = reclamoRepository.findById(numero);
         if(reclamo.isPresent()){
             reclamo.get().agregarImagen(imagen);
             reclamoRepository.save(reclamo.get());
-            imagenService.guardarimagen(imagen);
+            //imagenService.guardarimagen(imagen.getPath(),imagen.getTipo(),reclamo.get());
         }else{throw  new ReclamoException("El reclamo no existe");}
 
 
