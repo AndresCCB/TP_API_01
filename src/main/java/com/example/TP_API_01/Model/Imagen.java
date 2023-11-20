@@ -2,7 +2,9 @@ package com.example.TP_API_01.Model;
 
 import com.example.TP_API_01.Views.ImagenView;
 import jakarta.persistence.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
+@CrossOrigin (origins = "http://localhost:3000")
 @Entity
 @Table(name="imagenes")
 public class Imagen {

@@ -3,7 +3,9 @@ package com.example.TP_API_01.Model;
 
 import com.example.TP_API_01.Views.PersonaView;
 import jakarta.persistence.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
+@CrossOrigin (origins = "http://localhost:3000")
 @Entity
 @Table(name = "personas")
 public class Persona {

@@ -5,11 +5,13 @@ import com.example.TP_API_01.Exceptions.UnidadException;
 import com.example.TP_API_01.Views.EdificioView;
 import com.example.TP_API_01.Views.UnidadView;
 import jakarta.persistence.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
+@CrossOrigin (origins = "http://localhost:3000")
 @Entity
 @Table(name = "unidades")
 public class Unidad {

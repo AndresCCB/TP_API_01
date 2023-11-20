@@ -8,11 +8,13 @@ import com.example.TP_API_01.Views.ImagenView;
 import com.example.TP_API_01.Views.ReclamoView;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
+@CrossOrigin (origins = "http://localhost:3000")
 @Entity
 @Table(name = "reclamos")
 public class Reclamo {

@@ -1,9 +1,11 @@
 package com.example.TP_API_01.Model;
 
 import jakarta.persistence.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import java.util.ArrayList;
 
+@CrossOrigin (origins = "http://localhost:3000")
 @Entity
 @Table(name ="administradores")
 public class Administrador {
