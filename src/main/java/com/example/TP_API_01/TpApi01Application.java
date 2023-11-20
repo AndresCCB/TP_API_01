@@ -29,11 +29,6 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 
 
 @CrossOrigin(origins = "*")
-//Control-Access-Control-Allow-Origin: * como poner esto para que me permita hacer el get, post, put, delete, etc
-//desde el front que esta en el puerto 3000? (el back esta en el 8080)
-//https://stackoverflow.com/questions/31724994/spring-boot-rest-service-cors
-
-
 @SpringBootApplication
 public class TpApi01Application {
 
