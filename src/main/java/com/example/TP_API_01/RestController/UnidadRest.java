@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin(origins = "http://localhost:3000") //permite que se pueda acceder desde un front
 @RestController
 @RequestMapping("/unidades")
 public class UnidadRest {

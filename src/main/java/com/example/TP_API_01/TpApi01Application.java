@@ -25,8 +25,10 @@ import java.util.List;
 import java.util.Optional;
 import java.util.function.Function;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 
+@CrossOrigin(origins = "*")
 @SpringBootApplication
 public class TpApi01Application {
 

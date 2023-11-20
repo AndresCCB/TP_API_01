@@ -3,13 +3,14 @@ package com.example.TP_API_01.Model;
 import com.example.TP_API_01.Views.EdificioView;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
+@CrossOrigin (origins = "http://localhost:3000")
 @Entity
 @Table(name ="edificios")
 public class Edificio {
