@@ -53,6 +53,8 @@ public class UnidadService {
     }
 
 
+
+
     public List<PersonaView> dueniosPorUnidad(int codigo, String piso, String numero) throws UnidadException {
         List<PersonaView> resultado = new ArrayList<>();
         Unidad unidad = buscarUnidad(codigo, piso, numero);

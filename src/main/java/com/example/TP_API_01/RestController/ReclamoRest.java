@@ -45,6 +45,10 @@ public class ReclamoRest {
     public List<ReclamoView> reclamosPorPersona(@PathVariable ("id") String documento) throws PersonaException {
         return reclamoService.reclamosPorPersona(documento);
     }
+    @GetMapping("/listarReclamos")
+    public List<Reclamo> listarReclamos(){
+        return reclamoService.listarReclamos();
+    }
 
     @PostMapping("/agregarReclamo")
     public Reclamo agregarReclamo(@RequestParam String documento,@RequestParam Integer codigoEdificio, @RequestParam String ubicacion, @RequestParam String descripcion, @RequestParam String piso, @RequestParam String numeroUnidad) throws PersonaException, UnidadException, EdificioException {

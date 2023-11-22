@@ -119,4 +119,7 @@ public class ReclamoService {
         reclamoRepository.delete(reclamo);
     }
 
+    public List<Reclamo> listarReclamos(){
+        return reclamoRepository.findAll();
+    }
 }

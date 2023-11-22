@@ -52,10 +52,8 @@ public class PersonaService {
         Persona persona = buscarPersona(documento);
 
         if (persona != null) {
-            // Elimina los reclamos sin asignar explícitamente una persona dummy
             reclamoRepository.deleteByPersona(persona);
 
-            // Elimina la persona
             personaRepository.delete(persona);
         } else {
             throw new PersonaException("Persona no encontrada");
