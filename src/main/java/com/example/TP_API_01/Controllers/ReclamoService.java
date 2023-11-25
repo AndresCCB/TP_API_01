@@ -105,7 +105,6 @@ public class ReclamoService {
             reclamo.agregarImagen(imagen);
 
             reclamoRepository.save(reclamo);
-            imagenRepository.save(imagen);
 
         }else{throw  new ReclamoException("El reclamo no existe");}
 

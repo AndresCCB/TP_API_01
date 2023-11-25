@@ -13,7 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Map;
 
 @CrossOrigin(origins = "http://localhost:3000") //permite que se pueda acceder desde un front
 @RestController
@@ -60,9 +59,7 @@ public class ReclamoRest {
         reclamoService.agregarImagenAReclamo(id,imagen);
     }
     @PutMapping("/cambiarEstadoReclamo/{id}")//
-    public void cambiarEstadoReclamo(@PathVariable("id") int id, @RequestBody Map<String, String> request) throws ReclamoException {
-        String estadoString = request.get("estado");
-        Estado estado = Estado.fromString(estadoString);
+    public void cambiarEstadoReclamo(@PathVariable("id") int id, @RequestBody Estado estado) throws ReclamoException {
         reclamoService.cambiarEstado(id,estado);
     }
     @GetMapping("/obtenerEstado/{id}")
