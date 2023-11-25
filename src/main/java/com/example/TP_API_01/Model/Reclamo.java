@@ -36,7 +36,8 @@ public class Reclamo {
     @JoinColumn(name = "identificador")
     private Unidad unidad;
 
-    @Transient
+    @Enumerated(EnumType.STRING)
+    @Column(name = "estado")
     private Estado estado;
 
     @JsonIgnore
