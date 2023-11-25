@@ -59,7 +59,7 @@ public class ReclamoRest {
     public void agregarImagenAReclamo(@PathVariable ("id") Integer id, @RequestBody Imagen imagen) throws ReclamoException {
         reclamoService.agregarImagenAReclamo(id,imagen);
     }
-    @PutMapping("/cambiarEstadoReclamo/{id}")
+    @PutMapping("/cambiarEstadoReclamo/{id}")//
     public void cambiarEstadoReclamo(@PathVariable("id") int id, @RequestBody Map<String, String> request) throws ReclamoException {
         String estadoString = request.get("estado");
         Estado estado = Estado.fromString(estadoString);
