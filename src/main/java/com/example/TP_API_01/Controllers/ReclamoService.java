@@ -5,6 +5,7 @@ import com.example.TP_API_01.Exceptions.PersonaException;
 import com.example.TP_API_01.Exceptions.ReclamoException;
 import com.example.TP_API_01.Exceptions.UnidadException;
 import com.example.TP_API_01.Model.*;
+import com.example.TP_API_01.Repositories.ImagenRepository;
 import com.example.TP_API_01.Repositories.ReclamoRepository;
 import com.example.TP_API_01.Views.Estado;
 import com.example.TP_API_01.Views.ReclamoView;
@@ -20,10 +21,12 @@ import java.util.Set;
 public class ReclamoService {
 
     private final ReclamoRepository reclamoRepository;
+    private final ImagenRepository imagenRepository;
 
     @Autowired
-    public ReclamoService(ReclamoRepository reclamoRepository) {
+    public ReclamoService(ReclamoRepository reclamoRepository, ImagenRepository imagenRepository) {
         this.reclamoRepository = reclamoRepository;
+        this.imagenRepository = imagenRepository;
     }
 
     @Autowired
@@ -90,12 +93,20 @@ public class ReclamoService {
     }
 
 //al agregar una imagen al reclamo duplica la imagen una con el id del reclamo y una sin el
-    public void agregarImagenAReclamo(Integer numero,Imagen imagen) throws ReclamoException {
-        Optional<Reclamo> reclamo = reclamoRepository.findById(numero);
-        if(reclamo.isPresent()){
-            reclamo.get().agregarImagen(imagen);
-            reclamoRepository.save(reclamo.get());
-            //imagenService.guardarimagen(imagen.getPath(),imagen.getTipo(),reclamo.get());
+    public void agregarImagenAReclamo(Integer numero,Imagen imagenrecibida) throws ReclamoException {
+        Optional<Reclamo> Oreclamo = reclamoRepository.findById(numero);
+        if(Oreclamo.isPresent()){
+            Reclamo reclamo = Oreclamo.get();
+
+            Imagen imagen = new Imagen();
+            imagen.setReclamo(reclamo);
+            imagen.setPath(imagenrecibida.getPath());
+            imagen.setTipo(imagenrecibida.getTipo());
+            reclamo.agregarImagen(imagen);
+
+            reclamoRepository.save(reclamo);
+            imagenRepository.save(imagen);
+
         }else{throw  new ReclamoException("El reclamo no existe");}
 
 
