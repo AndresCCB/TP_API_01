@@ -62,6 +62,10 @@ public class ReclamoRest {
     public void cambiarEstadoReclamo(@PathVariable("id") int id, @RequestParam Estado estado) throws ReclamoException {
         reclamoService.cambiarEstado(id,estado);
     }
+    @GetMapping("/obtenerEstado/{id}")
+    public Estado obtenerEstado(@PathVariable("id") int id) throws  ReclamoException{
+        return reclamoService.buscarReclamo(id).getEstado();
+    }
     @DeleteMapping("/eliminarReclamo")
     public void eliminarReclamoPorPersona(@RequestParam Integer numero) throws ReclamoException {
         Reclamo reclamo = reclamoService.buscarReclamo(numero);
